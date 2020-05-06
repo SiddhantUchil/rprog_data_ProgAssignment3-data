@@ -8,3 +8,37 @@ head(main2)
 task1 = main2[ ,11]
 hist(task1)
 
+library(dplyr)
+
+
+best = function(state1, outcome){
+  
+  main2
+  file1 = main2[,c(2,7,11,17,23)]
+  names(file1) = c("hospital","state","attack","failure", "pneumonia")
+  
+  file2 = split(file1, file1$state)
+  file3 = data.frame(file2[state1])
+  
+  if(outcome == "heart attack"){
+    file3 = file3[, c(1,2,3)]
+  } else if (outcome == "heart failure"){
+    file3 = file3[, c(1,2,4)]
+  } else {
+    file3 = file3[, c(1,2,5)]
+  }
+  
+  file3 = na.omit(file3)
+  
+  names(file3) = c("hospital", "state", "outcome")
+  
+  sortedfile = arrange(file3, outcome, hospital)
+  
+  sortedfile
+}
+
+best("AL", "heart attack")
+
+
+
+
