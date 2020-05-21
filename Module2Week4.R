@@ -85,3 +85,66 @@ rankhospital("TX", "heart failure", "worst")
 
 
 
+a = data.frame(main2[, c(2,7,11,13,17)])
+colnames(a) = c("hospital", "state", "attack","failure", "pneumonia")
+str(a)
+s = split.data.frame(a, a$state)
+count(s)
+c = split(a, a$state, drop = TRUE)
+b = as.data.frame(unlist(c[1]))
+b
+h = c[1]
+h
+f = matrix(unlist(h), ncol = 5, byrow = FALSE)
+f
+
+rankall = function(outome1, num){
+  file1 = main2[, c(2,7,11,13,17)]
+  colnames(file1) = c("hospital", "state", "attack","failure", "pneumonia")
+  
+  {
+  if (outcome1 == "heart attack"){
+    file2 = file1[,c(1,2,3)]
+  } else if (outome1 == "heart failure"){
+    file2 = file1[, c(1,2,4)]
+  } else {
+    file2 = file1[, c(1,2,5)]
+  }
+  }
+  
+  file3 = na.omit(file2)
+  
+  colnames(file3) = c("hospital", "state", "outcome")
+  
+  file3 = arrange(file3, outcome, state)
+  
+  
+}
+
+
+best("SC", "heart attack")
+best("NY", "pneumonia")
+
+best("AK", "pneumonia")
+rankhospital("NC", "heart attack", "worst")
+rankhospital("WA", "heart attack", 7)
+rankhospital("TX", "pneumonia", 10)
+rankhospital("NY", "heart attack", 7)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
